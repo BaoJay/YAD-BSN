@@ -1,0 +1,173 @@
+<?php
+session_start();
+$error_message = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['form_name']) && $_POST['form_name'] == 'changepassword')
+{
+   $database = './usersdb.php';
+   $success_page = '';
+   if (!isset($_SESSION['username']))
+   {
+      $error_message = 'Not logged in!';
+   }
+   else
+   if (filesize($database) == 0)
+   {
+      $error_message = 'User database not found!';
+   }
+   else
+   {
+      $password_value = md5($_POST['password']);
+      $newpassword = md5($_POST['newpassword']);
+      $confirmpassword = md5($_POST['confirmpassword']);
+      $username_value = $_SESSION['username'];
+      if ($_POST['newpassword'] != $_POST['confirmpassword'])
+      {
+         $error_message = 'The confirm new password must match the new password entry';
+      }
+      else
+      if (!preg_match("/^[A-Za-z0-9-_!@$]{1,50}$/", $_POST['newpassword']))
+      {
+         $error_message = 'New password is not valid, please check and try again!';
+      }
+      else
+      {
+         $items = file($database, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+         foreach($items as $line)
+         {
+            list($username, $password) = explode('|', trim($line));
+            if ($username_value == $username)
+            {
+               if ($password_value != $password)
+               {
+                  $error_message = 'Old password is not valid!';
+                  break;
+               }
+            }
+         }
+         if (empty($error_message))
+         {
+            $file = fopen($database, 'w');
+            foreach($items as $line)
+            {
+               $values = explode('|', trim($line));
+               if ($username_value == $values[0])
+               {
+                  $values[1] = $newpassword;
+                  $line = '';
+                  for ($i=0; $i < count($values); $i++)
+                  {
+                     if ($i != 0)
+                        $line .= '|';
+                     $line .= $values[$i];
+                  }
+               }
+               fwrite($file, $line);
+               fwrite($file, "\r\n");
+            }
+            fclose($file);
+            header('Location: '.$success_page);
+            exit;
+         }
+      }
+   }
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Supreme Dashboard</title>
+<meta name="generator" content="BSN">
+<link href="font-awesome.min.css" rel="stylesheet">
+<link href="BSN_admin.css" rel="stylesheet">
+<link href="changepwd.css" rel="stylesheet">
+</head>
+<body>
+
+<textarea name="ad_note" id="ad_note" style="position:absolute;left:102px;top:483px;width:985px;height:285px;z-index:1;" rows="12" cols="74" spellcheck="false">1) Duyệt đơn doanh nghiệp Cisco
+2) Cập nhật Deadline
+3) 20/7 nghỉ phép đi du lịch</textarea>
+<div id="wb_Text4" style="position:absolute;left:131px;top:427px;width:168px;height:36px;z-index:2;">
+<span style="color:#000000;font-family:Arial;font-size:32px;"><strong><em>To-do list</em></strong></span></div>
+<div id="wb_Text3" style="position:absolute;left:446px;top:819px;width:310px;height:36px;text-align:center;z-index:3;">
+<span style="color:#000000;font-family:Arial;font-size:32px;"><strong><em>Change password</em></strong></span></div>
+<div id="wb_ChangePassword1" style="position:absolute;left:325px;top:875px;width:552px;height:284px;z-index:4;">
+<form name="changepasswordform" method="post" accept-charset="UTF-8" action="<?php echo basename(__FILE__); ?>" id="changepasswordform">
+<input type="hidden" name="form_name" value="changepassword">
+<table id="ChangePassword1">
+<tr>
+   <td class="header">Change your password</td>
+</tr>
+<tr>
+   <td class="label"><label for="password">Password</label></td>
+</tr>
+<tr>
+   <td class="row"><input class="input" name="password" type="password" id="password"></td>
+</tr>
+<tr>
+   <td class="label"><label for="newpassword">New Password</label></td>
+</tr>
+<tr>
+   <td class="row"><input class="input" name="newpassword" type="password" id="newpassword"></td>
+</tr>
+<tr>
+   <td class="label"><label for="confirmpassword">Confirm New Password</label></td>
+</tr>
+<tr>
+   <td class="row"><input class="input" name="confirmpassword" type="password" id="confirmpassword"></td>
+</tr>
+<tr>
+   <td><?php echo $error_message; ?></td>
+</tr>
+<tr>
+   <td style="text-align:center;vertical-align:bottom"><input class="button" type="submit" name="changepassword" value="Change Password" id="changepassword"></td>
+</tr>
+</table>
+</form>
+</div>
+<div id="wb_Text1" style="position:absolute;left:337px;top:70px;width:529px;height:77px;text-align:center;z-index:5;">
+<span style="color:#000000;font-family:Arial;font-size:35px;"><strong>BUSINESS SOCIAL NETWORK<br>Connect to Opportunity</strong></span></div>
+<div id="wb_ResponsiveMenu1" style="position:absolute;left:337px;top:156px;width:764px;height:95px;z-index:6;">
+<label class="toggle" for="ResponsiveMenu1-submenu" id="ResponsiveMenu1-title">Menu<span id="ResponsiveMenu1-icon"><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span></span></label>
+<input type="checkbox" id="ResponsiveMenu1-submenu">
+<ul class="ResponsiveMenu1" id="ResponsiveMenu1" role="menu">
+<li role="menuitem">
+<label for="ResponsiveMenu1-submenu-0" class="toggle"><i class="fa fa-angellist fa-2x">&nbsp;</i>Verify&nbsp;Business<b class="arrow-down"></b></label>
+<a href="javascript:void(0)"><i class="fa fa-angellist fa-2x">&nbsp;</i><br>Verify&nbsp;Business<b class="arrow-down"></b></a>
+<input type="checkbox" id="ResponsiveMenu1-submenu-0">
+<ul role="menu">
+<li role="menuitem"><a href="./../verify/new_reg.html"><i class="fa fa-handshake-o fa-2x">&nbsp;</i>New&nbsp;Request</a></li>
+<li role="menuitem"><a href="./../verify/pending.html"><i class="fa fa-hourglass-half fa-2x">&nbsp;</i>Pending&nbsp;for&nbsp;Approve</a></li>
+<li role="menuitem"><a href="./../verify/approve.html"><i class="fa fa-building fa-2x">&nbsp;</i>Approve&nbsp;Business</a></li>
+<li role="menuitem"><a href="./../verify/deactivate.html"><i class="fa fa-exclamation-circle fa-2x">&nbsp;</i>Deactivate&nbsp;Business</a></li>
+</ul>
+</li>
+<li role="menuitem">
+<label for="ResponsiveMenu1-submenu-1" class="toggle"><i class="fa fa-filter fa-2x">&nbsp;</i>Filters<b class="arrow-down"></b></label>
+<a href="javascript:void(0)"><i class="fa fa-filter fa-2x">&nbsp;</i><br>Filters<b class="arrow-down"></b></a>
+<input type="checkbox" id="ResponsiveMenu1-submenu-1">
+<ul role="menu">
+<li role="menuitem"><a href="./../filter/all.html">All&nbsp;Businesses</a></li>
+<li role="menuitem"><a href="./../filter/custom.html">Custom&nbsp;Filters</a></li>
+</ul>
+</li>
+<li role="menuitem">
+<label for="ResponsiveMenu1-submenu-2" class="toggle"><i class="fa fa-folder-open-o fa-2x">&nbsp;</i>Account&nbsp;Settings<b class="arrow-down"></b></label>
+<a href="javascript:void(0)"><i class="fa fa-folder-open-o fa-2x">&nbsp;</i><br>Account&nbsp;Settings<b class="arrow-down"></b></a>
+<input type="checkbox" id="ResponsiveMenu1-submenu-2">
+<ul role="menu">
+<li role="menuitem"><a href="./support_reg.html">Support&nbsp;Requests</a></li>
+<li role="menuitem"><a href="./changepwd.html">Change&nbsp;Passwords</a></li>
+<li role="menuitem"><a href="./logout.html">Logout</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="wb_Text2" style="position:absolute;left:953px;top:126px;width:168px;height:21px;z-index:7;">
+<span style="color:#000000;font-family:Arial;font-size:19px;"><strong><em>Howdy, $ADMIN</em></strong></span></div>
+<div id="wb_Image1" style="position:absolute;left:102px;top:62px;width:220px;height:208px;z-index:8;">
+<img src="images/logo.png" id="Image1" alt="" width="220" height="207"></div>
+<div id="wb_Shape1" style="position:absolute;left:107px;top:1443px;width:989px;height:114px;z-index:9;">
+<img src="images/img0010.png" id="Shape1" alt="" width="989" height="114" style="width:989px;height:114px;"></div>
+</body>
+</html>

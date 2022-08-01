@@ -1,0 +1,170 @@
+div#container
+{
+   width: 1800px;
+   position: relative;
+   margin: 0 auto 0 auto;
+   text-align: left;
+}
+body
+{
+   background-color: #FFFFFF;
+   background-image: url('BSN-bg.webp');
+   background-attachment: fixed;
+   background-position: center top;
+   background-repeat: repeat;
+   background-size: 100% 100%;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   line-height: 1.1875;
+   margin: 0;
+   text-align: center;
+}
+a
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+a:visited
+{
+   color: #800080;
+}
+a:active
+{
+   color: #FF0000;
+}
+a:hover
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+input:focus, textarea:focus, select:focus
+{
+   outline: none;
+}
+#wb_Text1 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text1 div
+{
+   text-align: center;
+}
+#wb_Text2 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text2 div
+{
+   text-align: center;
+}
+#ad_login
+{
+   background-color: #FFFFFF;
+   border-color:#FFFFFF;
+   border-width:1px;
+   border-style: solid;
+   border-radius: 4px;
+   color: #000000;
+   border-spacing: 15px;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 19px;
+   font-style: normal;
+   text-align: center;
+   width: 662px;
+   height: 285px;
+}
+#ad_login td
+{
+   padding: 0;
+}
+#ad_login .header
+{
+   background-color: #FFFFFF;
+   color: #000000;
+   height: 22px;
+   padding: 15px 4px 15px 4px;
+   text-align: center;
+}
+#ad_login .label
+{
+   height: 24px;
+   width:142px;
+}
+#ad_login .row
+{
+   height: 24px;
+   text-align: left;
+}
+#ad_login .input
+{
+   background-color: #FFFFFF;
+   border-color: #CCCCCC;
+   border-width: 1px;
+   border-style: solid;
+   border-radius: 10px;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 19px;
+   font-style: normal;
+   width: 450px;
+   height: 21px;
+   padding: 6px 4px 6px 10px;
+}
+#ad_login .input:focus
+{
+   border-color: #66AFE9;
+   outline: 0;
+   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+}
+#ad_login .button
+{
+   background-color: #3370B7;
+   border-color: #2E6DA4;
+   border-width: 1px;
+   border-style: solid;
+   border-radius: 3px;
+   color: #FFFFFF;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 19px;
+   font-style: normal;
+   width: 180px;
+   height: 50px;
+   -webkit-appearance: none;
+}
+#wb_Image1
+{
+   vertical-align: top;
+}
+#Image1
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#Shape1
+{
+   border-width: 0;
+   vertical-align: top;
+}

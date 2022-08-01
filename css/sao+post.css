@@ -1,0 +1,63 @@
+/*chỉnh sao*/
+.ti-star{
+    color:yellow;
+    font-size: 20px;
+    line-height: 46px;
+  }
+  /*post*/
+ 
+  .row {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+  .mt-8  {
+    margin-top: 8px !important;
+    border-radius: 5px;
+  }
+  .col {
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .col-full {
+    width: 100%;
+  }
+  .contact-form .form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  .contact-form .form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  .btn-1{
+    color: #fff;
+    color: #000;
+    text-decoration: none;
+    padding: 11px 16px;
+    display: inline-block;
+    margin-top: 15px;
+    border: none;
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color:#ccc;
+  }
+  .btn-1:hover {
+    color: #000;
+    background-color: #d8bfd8;
+    cursor: pointer;
+  }
+  .mt-16  {
+    margin-top:16px !important;
+  }
+  .pull-right {
+    float: right !important;
+  }
+  .col {
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
